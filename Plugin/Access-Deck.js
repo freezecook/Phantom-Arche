@@ -82,10 +82,12 @@
 				var i;
 				for (i = 0; i < Deck.length; i++){
 					if (unit.getUnitType() != UnitType.PLAYER){
-						Dynamo.unitItemChange(unit,Deck[i],IncreaseType.INCREASE,true);
+						//Dynamo.unitItemChange(unit,Deck[i],IncreaseType.INCREASE,true);
+						ItemChangeControl._increaseUnitItem(unit, Deck[i]);
 					}
 					else{
-						Dynamo.unitItemChange(unit,Deck[i],IncreaseType.INCREASE,false);
+						//Dynamo.unitItemChange(unit,Deck[i],IncreaseType.INCREASE,false);
+						ItemChangeControl._increaseUnitItem(unit, Deck[i]);
 					}
 					// UnitItemControl.pushItem(unit,Deck[i])
 				}
