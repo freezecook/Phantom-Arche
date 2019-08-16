@@ -73,7 +73,10 @@ StateControl.arrangeState = function(unit, state, increaseType) {
 			//This is where I'll decrease a card's usage for defense mode.
 			if (state.getName() === 'Defense') {
 				var counterWeapon = ItemControl.getEquippedWeapon(unit);
-				counterWeapon.setLimit(counterWeapon.getLimit() - 1);
+				root.log(counterWeapon.getName());
+				ItemChangeControl._decreaseUnitItem(unit, counterWeapon, false);
+				
+				/*counterWeapon.setLimit(counterWeapon.getLimit() - 1);
 				if (counterWeapon.getLimit() === 0)
 				{
 					//The equipped item should always be in position 1.
@@ -86,6 +89,7 @@ StateControl.arrangeState = function(unit, state, increaseType) {
 						}
 					}
 				}
+				*/
 			}
 			editor.deleteTurnStateData(list, state);
 			
@@ -128,20 +132,24 @@ AttackEvaluator.HitCritical.calculateDamage = function(virtualActive, virtualPas
 	//Check if targeted unit is in Defense mode.
 	for (i = 0; i < count; i++) {
 			turnState = stateList.getData(i);
+			
 			if (turnState.getState().getName() === 'Defense') {
+				root.log("anyone there?");
 				//I need to get the Mt of virtualPassive's equipped weapon.
 				var counterWeapon = ItemControl.getEquippedWeapon(virtualPassive.unitSelf);
 				boost = -1 * (counterWeapon.getPow());
 				if (damage + boost >= 0){
+					//this will use the defense card and immediately remove the defend state.
 					//No counterattack occurs, but damage is reduced and the card is used up.
+					root.log("Damage Taken! Deleting Card..");
+					StateControl.arrangeState(virtualPassive.unitSelf, turnState.getState(), IncreaseType.DECREASE);
+					
 					//counterWeapon.setLimit(counterWeapon.getLimit() - 1);
 					return damage + boost;
-					//this will use the defense card and immediately remove the defend state.
-					root.log("Damage Taken! Deleting Card..")
-					StateControl.arrangeState(virtualPassive.unitSelf, turnState.getState(), IncreaseType.DECREASE)
 				}
 				else{
 					//A CounterAttack is imminent! That logic is handled elsewhere; I just return 0 damage here.
+					root.log("you done goofed");
 					return 0;
 				}
 				
