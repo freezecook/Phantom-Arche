@@ -215,7 +215,7 @@ var WandCommandMode = {
 	USE: 2
 };
 
-/*
+
 WeaponSelectMenu = defineObject(BaseWindowManager,
 {
 	_unit: null,
@@ -332,7 +332,7 @@ WeaponSelectMenu = defineObject(BaseWindowManager,
 	}
 }
 );
-*/
+
 /*
 //At the beginning of the turn, I want to fill the player's hand if possible.
 PlayerTurn._prepareTurnMemberData = function(){
