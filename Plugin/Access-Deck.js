@@ -77,8 +77,8 @@
 			_moveAccess: function () {
 				var unit = this.getCommandTarget();
 				var Deck = this._getDeckArray(unit);
-				var Generator = createObject(DynamicEvent)
-				var Dynamo = Generator.acquireEventGenerator()
+				//var Generator = createObject(DynamicEvent)
+				//var Dynamo = Generator.acquireEventGenerator()
 				var i;
 				for (i = 0; i < Deck.length; i++){
 					if (unit.getUnitType() != UnitType.PLAYER){
@@ -91,9 +91,10 @@
 					}
 					// UnitItemControl.pushItem(unit,Deck[i])
 				}
-				Dynamo.execute()
-				this.endCommandAction()
-				return MoveResult.END;
+				//Dynamo.execute()
+				//this.endCommandAction()
+				//return MoveResult.END;
+				return MoveResult.CONTINUE;
 			},
 
 			_drawAccess: function () {

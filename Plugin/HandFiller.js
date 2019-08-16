@@ -35,6 +35,7 @@
 		var i, j, swapItem, item;
 		var count = this.getPossessionItemCount(unit);
 		var maxCount = DataConfig.getMaxUnitItemCount();
+		var dummyCard = root.getBaseData().getItemList().getData(6);
 		
 		var cardStartPoint = 0;
 		var sleightStartPoint = 5;
@@ -61,12 +62,15 @@
 				//Cards in-hand are the first set of items and use slots 1-5. (Starts from 0 in-code)
 				if (unit.getItem(i).custom.Type === "Card")
 				{
+					root.log("located " + unit.getItem(i).getName() + " at slot " + i);
 					if (i >= sleightStartPoint)
 					{
+						root.log("working...");
 						for (j = cardStartPoint; j < DataConfig.getHandLimit(); j++)
 						{
 							if (unit.getItem(j) === null)
 							{
+								root.log("squad...");
 								//move item and clear the current location.
 								unit.setItem(j, unit.getItem(i));
 								unit.clearItem(i);
@@ -75,6 +79,7 @@
 							}
 							else if (unit.getItem(j).custom.Type !== "Card")
 							{
+								root.log("gang...");
 								//We need to swap this item to the current location. 
 								//We'll also need to start at the same place next iteration.
 								swapItem = unit.getItem(j);
@@ -83,6 +88,10 @@
 								//cardStartPoint++;
 								i--;
 								break;
+							}
+							else {
+								root.log("wtf");
+								//unit.clearItem(i);
 							}
 						}
 					}
@@ -202,10 +211,24 @@
 						}
 					}
 				}
+				//Dummies simply fill space to reduce errors/increase compatibility with native scripts.
+				//I just delete them here.
+				else if (unit.getItem(i).custom.Type === "Dummy")
+				{
+					unit.clearItem(i);
+				}
 			}
 			
-			
 		}
+		//Fill empty slots with dummies.
+		for (i = 0; i < maxCount -1; i++)
+		{
+			if (unit.getItem(i) === null)
+			{
+				unit.setItem(i, dummyCard);
+			}
+		}
+		
 		
 		//logging loop.
 		for (i = 0; i < maxCount; i++)
@@ -218,24 +241,9 @@
 		}
 		
 		root.log("-----------------------------------------");
-		
-		//
-		/*
-		// Stuff the item in order not to have a blank between items.
-		for (i = 0; i < count; i++) {
-			if (unit.getItem(i) === null) {
-				for (j = i + 1; j < maxCount; j++) {
-					item = unit.getItem(j);
-					if (item !== null) {
-						unit.setItem(i, item);
-						unit.clearItem(j);
-						break;
-					}
-				}
-			}
-		}
-		*/
 	}
+	
+	
 	//This checks how many cards are currently in the hand, i.e. the first 5 slots.
 	UnitItemControl.getHandCount = function(unit){
 		var i;

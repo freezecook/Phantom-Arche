@@ -4,7 +4,7 @@ UnitCommand.configureCommands = function(groupArray) {
 		//New Attack Option
 		groupArray.appendObject(UnitCommand.Sleight);
 		//Deck Filler (temporary)
-		groupArray.appendObject(UnitCommand.Deck);
+		//groupArray.appendObject(UnitCommand.Deck);
 		//DECK001.call(this, groupArray);
 		
 		groupArray.appendObject(UnitCommand.PlaceCommand);

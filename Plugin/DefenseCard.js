@@ -137,6 +137,7 @@ AttackEvaluator.HitCritical.calculateDamage = function(virtualActive, virtualPas
 					//counterWeapon.setLimit(counterWeapon.getLimit() - 1);
 					return damage + boost;
 					//this will use the defense card and immediately remove the defend state.
+					root.log("Damage Taken! Deleting Card..")
 					StateControl.arrangeState(virtualPassive.unitSelf, turnState.getState(), IncreaseType.DECREASE)
 				}
 				else{
