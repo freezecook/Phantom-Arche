@@ -105,10 +105,85 @@
 				var count = Math.min(DataConfig.getHandLimit() + 1 - UnitItemControl.getHandCount(unit),unit.custom.Deck.length)
 				var Deck = unit.custom.Deck
 				var i, Card, RandInt;
+				var Skills1 = -1;
+				var Skills2 = -1;
+				var Skills3 = -1;
+				var Skills4 = -1;
+				var Suit1 = "None";
+				var Suit2 = "None";
+				var Suit3 = "None";
+				var Suit4 = "None";
+				
+				for (i = 0; i < DataConfig.getMaxUnitItemCount(); i++){
+					if (unit.getItem(i) !== null){
+						root.log( i + ": " + unit.getItem(i).getName() + ": " + unit.getItem(i).custom.Type );
+						
+						if (unit.getItem(i).custom.Type === "Suit"){
+							if (Skills1 === -1){
+								root.log("Skills1 acquired");
+								Skills1 = unit.getItem(i).getSkillReferenceList();
+							}
+							else if (Skills2 === -1){
+								Skills2 = unit.getItem(i).getSkillReferenceList();
+							}
+							else if (Skills3 === -1){
+								Skills3 = unit.getItem(i).getSkillReferenceList();
+							}
+							else if (Skills4 === -1){
+								Skills4 = unit.getItem(i).getSkillReferenceList();
+							}
+						}
+						
+					}
+				}
+				
+				if (Skills1 !== -1){
+					for ( i = 0; i < Skills1.getTypeCount(); i++){
+							root.log(Skills1.getTypeData(i).getName());
+							Suit1 = Skills1.getTypeData(i).getName();
+					}
+				}
+				else {
+					root.log("error finding suit item 1");
+				}
+				
+				if (Skills2 !== -1){
+					for ( i = 0; i < Skills2.getTypeCount(); i++){
+							root.log(Skills2.getTypeData(i).getName());
+							Suit2 = Skills2.getTypeData(i).getName();
+					}
+				}
+				else {
+					root.log("error finding suit item 2");
+				}
+				
+				if (Skills3 !== -1){
+					for ( i = 0; i < Skills3.getTypeCount(); i++){
+							root.log(Skills3.getTypeData(i).getName());
+							Suit3 = Skills3.getTypeData(i).getName();
+					}
+				}
+				else {
+					root.log("error finding suit item 3");
+				}
+				
+				if (Skills4 !== -1){
+					for ( i = 0; i < Skills4.getTypeCount(); i++){
+							root.log(Skills4.getTypeData(i).getName());
+							Suit4 = Skills4.getTypeData(i).getName();
+					}
+				}
+				else {
+					root.log("error finding suit item 4");
+				}
+		
+				root.log("--------------------" + unit.getName() + "'s Skills Above---------------------------");
+				
 				i = 0;
 				while (i < count) {
 					RandInt = Math.round(Math.random()*Deck.length)
-					if (Deck[RandInt] !== null && Deck[RandInt] !== undefined){
+					if (Deck[RandInt] !== null && Deck[RandInt] !== undefined && (Deck[RandInt][2] === Suit1 ||
+								Deck[RandInt][2] === Suit2 || Deck[RandInt][2] === Suit3 || Deck[RandInt][2] === Suit4)){
 						Card = UnitCardControl.getCard(unit,RandInt)
 						DeckArrayNew.push(Card)
 						Deck.splice(RandInt,1)

@@ -41,10 +41,10 @@
 		var sleightStartPoint = 5;
 		var suitStartPoint = 11;
 		
-		root.log("Initial Arrangement:");
+		//root.log("Initial Arrangement:");
 		
 		//logging loop 1.
-		for (i = 0; i < maxCount; i++)
+		/*for (i = 0; i < maxCount; i++)
 		{
 			if (unit.getItem(i) !== null)
 			{
@@ -54,7 +54,7 @@
 		}
 		
 		root.log("rearranging Items...");
-		
+		*/
 		for (i = 0; i < maxCount; i++)
 		{
 			if (unit.getItem(i) !== null)
@@ -62,15 +62,15 @@
 				//Cards in-hand are the first set of items and use slots 1-5. (Starts from 0 in-code)
 				if (unit.getItem(i).custom.Type === "Card")
 				{
-					root.log("located " + unit.getItem(i).getName() + " at slot " + i);
+					//root.log("located " + unit.getItem(i).getName() + " at slot " + i);
 					if (i >= sleightStartPoint)
 					{
-						root.log("working...");
+						//root.log("working...");
 						for (j = cardStartPoint; j < DataConfig.getHandLimit(); j++)
 						{
 							if (unit.getItem(j) === null)
 							{
-								root.log("squad...");
+								//root.log("squad...");
 								//move item and clear the current location.
 								unit.setItem(j, unit.getItem(i));
 								unit.clearItem(i);
@@ -79,7 +79,7 @@
 							}
 							else if (unit.getItem(j).custom.Type !== "Card")
 							{
-								root.log("gang...");
+								//root.log("gang...");
 								//We need to swap this item to the current location. 
 								//We'll also need to start at the same place next iteration.
 								swapItem = unit.getItem(j);
@@ -90,7 +90,7 @@
 								break;
 							}
 							else {
-								root.log("wtf");
+								//root.log("wtf");
 								//unit.clearItem(i);
 							}
 						}
@@ -171,7 +171,7 @@
 						{
 							if (unit.getItem(j) === null)
 							{
-								root.log(unit.getItem(i).getName() + " said SQUAD at i = " + i);
+								//root.log(unit.getItem(i).getName() + " said SQUAD at i = " + i);
 								//move item and clear the current location.
 								unit.setItem(j, unit.getItem(i));
 								unit.clearItem(i);
@@ -183,7 +183,7 @@
 								//We need to swap this item to the current location. 
 								//We'll also need to start at the same place next iteration.
 								swapItem = unit.getItem(j);
-								root.log("swapping " + unit.getItem(i).getName() + " to slot " + i);
+								//root.log("swapping " + unit.getItem(i).getName() + " to slot " + i);
 								unit.setItem(j, unit.getItem(i));
 								unit.setItem(i, swapItem);
 								//suitStartPoint++;
@@ -231,7 +231,7 @@
 		
 		
 		//logging loop.
-		for (i = 0; i < maxCount; i++)
+		/*for (i = 0; i < maxCount; i++)
 		{
 			if (unit.getItem(i) !== null)
 			{
@@ -241,6 +241,7 @@
 		}
 		
 		root.log("-----------------------------------------");
+		*/
 	}
 	
 	
@@ -276,7 +277,7 @@
 	*/
 	
 	UnitItemControl.pushItem = function(unit, item) {
-		root.log("PushItem reached....");
+		//root.log("PushItem reached....");
 		var count = this.getPossessionItemCount(unit);
 		
 		if (count < DataConfig.getMaxUnitItemCount()) {	
@@ -290,14 +291,14 @@
 	
 	UnitItemControl.insertItem = function(unit, item, isCard, isSleight) {
 		var count = this.getPossessionItemCount(unit);
-		root.log("made it");
+		//root.log("made it");
 		//Cards in-hand are the first set of items and use slots 1-5. (Starts from 0 in-code)
 		if (isCard === true){
 			for (i = 0; i <= 4; i++) {
-				root.log("Item slot " + i);
+				//root.log("Item slot " + i);
 				//root.log(unit.getItem(i).getId());
 				if (unit.getItem(i) === null) {
-					root.log("inserting at " + i);
+					//root.log("inserting at " + i);
 					unit.setItem(i, item);
 					return true;
 				}
